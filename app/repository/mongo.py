@@ -1,6 +1,7 @@
 import os
 from pymongo import MongoClient
 
+
 COLLECTION_NAME = 'kudos'
 
 
