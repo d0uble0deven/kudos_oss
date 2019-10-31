@@ -43,7 +43,7 @@ def update(repo_id):
     github_repo = GithubRepoSchema().load(json.loads(request.data))
 
     if github_repo.errors:
-        return json_response({'error': guthub_repo.errors}, 422)
+        return json_response({'error': github_repo.errors}, 422)
 
     kudo_service = Kudo(g.user)
     if kudo_service.update_kudo_with(repo_id, github_repo):
