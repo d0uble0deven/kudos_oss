@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Router, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Security, ImplicitCallback, SecureRoute } from '@okta/okta-react';
 
 import Login from '../Login'
@@ -10,10 +10,11 @@ class Main extends Component {
         return (
             <Router>
                 <Security
-                    issuer={yourOktaDomain}
-                    client_id={yourClientId}
+                    issuer={'https://dev-401845.okta.com'}
+                    client_id={'0oa1pm1n6hgFnaWXV357'}
                     redirect_uri={'https://locatlhost:8080/implicit/callback'}
-                    scope={['openid'], 'profile', 'email'}>
+                    scope={['openid', 'profile', 'email']}>
+
                     <Switch>
                         <Route exact path="/" component={Login} />
                         <Route path="/implicit/callback" component={ImplicitCallback} />

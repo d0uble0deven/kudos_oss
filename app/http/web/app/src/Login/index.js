@@ -30,8 +30,7 @@ class Login extends React.Component {
     render() {
         if (this.state.authenticated) {
             return <Redirect to='/home' />
-        }
-        else {
+        } else {
             return (
                 <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Button variant="contained" color="primary" onClick={this.login}>Login with Okta</Button>
