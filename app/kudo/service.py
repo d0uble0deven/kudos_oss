@@ -19,3 +19,7 @@ class Service(object):
         kudo = self.repo_client.find(
             {'user_id': self.user_id, 'repo_id': repo_id})
         return self.dump(kudo)
+
+    def create_kudo_for(self, githubRepo):
+        self.repo_client.create(self.prepare_kudo(githubRepo))
+        return self.dump(githubRepo.data)
