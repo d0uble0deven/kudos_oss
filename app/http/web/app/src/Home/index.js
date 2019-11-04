@@ -79,6 +79,32 @@ class Home extends React.Component {
         }
     }
 
+    onSearch = event => {
+        const target = event.target;
+        if (!target.value || target.length < 3) { return }
+        if (event.which !== 13) { return }
+
+        githubClient
+            .getJSONRepos(target.value)
+            .then((response) => {
+                target.blur();
+                this.setState({
+                    ...this.state, value: 1
+                });
+                this.resetRepos(response.items);
+            })
+    }
+    renderRepos = repos => {
+        if (!repos) { return [] }
+        return repos.map((repo) => {
+            return (
+                <Grid item xs={12} md={3} key={repo.id}>
+                    <GithubRepo onKudo={this.onKudo} isKudo={this.isKudo(repo)} repo={repo} />
+                </Grid>
+            );
+        })
+    }
+
 
 }
 
