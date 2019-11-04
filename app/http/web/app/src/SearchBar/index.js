@@ -72,7 +72,7 @@ const styles = theme => ({
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.logout - this.logout.bind(this);
+        this.logout = this.logout.bind(this);
     }
     async logout(e) {
         e.preventDefault();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, StylesProvider } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -49,7 +49,7 @@ class Home extends React.Component {
 
     resetRepos = repos => this.setState({ ...this.state, repos })
 
-    isKudo = repo => this.state.kudos.find(r => r.id == repo.id)
+    isKudo = repo => this.state.kudos.find(r => r.id === repo.id)
     onKudo = repo => {
         this.updateBackend(repo);
     }
@@ -104,16 +104,26 @@ class Home extends React.Component {
             );
         })
     }
+    render() {
+        return (
+            <div className={styles.root}>
+                <SearchBar auth={this.props.auth} onSearch={this.onSearch} />
+                <Tabs value={this.state.value} onChange={this.handleTabChange} indicatorColor="primary" indicatorColor="primary" textColor="primary" fullWidth>
+                    <Tab label="Kudos" />
+                    <Tab label="Search" />
+                </Tabs>
 
+                <SwipeableViews axis={'x-reverse'} index={this.state.value} onChangeIndex={this.handleTabChangeIndex}>
+                    <Grid container spacing={16} style={{ padding: '20px 0' }}>
+                        {this.renderRepos(this.state.repos)}
+                    </Grid>
+                </SwipeableViews>
+            </div>
+        );
+    }
 
 }
 
 
 
-
-
-
-
-
-
-export default withStyles(styles)(withAuth(home));
+export default withStyles(styles)(withAuth(Home));
