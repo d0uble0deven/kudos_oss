@@ -23,3 +23,8 @@ class Service(object):
     def create_kudo_for(self, githubRepo):
         self.repo_client.create(self.prepare_kudo(githubRepo))
         return self.dump(githubRepo.data)
+
+    def update_kudo_with(self, repo_id, githubRepo):
+        records_affected = self.repo_client.update(
+            {'user_id': self.user_id, 'repo_id': repo_id}, self.prepare_kudo(githubRepo))
+        return records_affected > 0
