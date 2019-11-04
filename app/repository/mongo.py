@@ -1,7 +1,6 @@
 import os
 from pymongo import MongoClient
 
-
 COLLECTION_NAME = 'kudos'
 
 
@@ -11,7 +10,7 @@ class MongoRepository(object):
         self.db = MongoClient(mongo_url).kudos
 
     def find_all(self, selector):
-        return self.db.kudos.find(selector)
+        return self.db.kudos.find_one(selector)
 
     def find(self, selector):
         return self.db.kudos.find_one(selector)
@@ -20,7 +19,7 @@ class MongoRepository(object):
         return self.db.kudos.insert_one(kudo)
 
     def update(self, selector, kudo):
-        return self.db.kudos.replace_one(selector, kudo).modified_count
+        return self.db.kudos.replace_one(selector, kudo). modified_count
 
     def delete(self, selector):
         return self.db.kudos.delete_one(selector).deleted_count
