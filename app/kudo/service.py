@@ -1,5 +1,5 @@
-from ..repository import Repository
-from ..repository.mongo import MongoRepository
+from app.repository.__init__ import Repository
+from app.repository.mongo import MongoRepository
 from .schema import KudoSchema
 
 

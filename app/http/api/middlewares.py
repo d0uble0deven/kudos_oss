@@ -16,6 +16,7 @@ def login_required(f):
             g.user = resp['sub']
         except exceptions.DecodeError as identifier:
             return json.dumps({'error': 'invalid authorizaiton token'}), 403, {'Content-type': 'application/json'}
+
         return f(*args, **kwargs)
 
     return wrap
