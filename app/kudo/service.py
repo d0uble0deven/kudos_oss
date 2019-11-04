@@ -14,3 +14,8 @@ class Service(object):
     def find_all_kudos(self):
         kudos = self.repo_client.find_all({'user_id': self.user_id})
         return [self.dump(kudo) for kudo in kudos]
+
+    def find_kudo(self, repo_id):
+        kudo = self.repo_client.find(
+            {'user_id': self.user_id, 'repo_id': repo_id})
+        return self.dump(kudo)
