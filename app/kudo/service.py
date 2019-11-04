@@ -10,3 +10,7 @@ class Service(object):
 
         if not user_id:
             raise Exception("user id not provided")
+
+    def find_all_kudos(self):
+        kudos = self.repo_client.find_all({'user_id': self.user_id})
+        return [self.dump(kudo) for kudo in kudos]
