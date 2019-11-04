@@ -16,7 +16,28 @@ class APIClient {
         return this.perform('post', '/kudos', repo);
     }
 
+    deleteKudos(repo) {
+        return this.perform('delete', `/kudos/${repo.id}`);
 
+    }
 
+    getKudos() {
+        return this.perform('get', '/kudos');
 
+    }
+
+    async perform(method, resource, data) {
+        return client({
+            method,
+            url: resource,
+            data,
+            headers: {
+                Authorization: `Bearer ${this.accessToken}`
+            }
+        }).then(resp => {
+            return resp.data ? resp.data : [];
+        })
+    }
 }
+
+export default APIClient;
