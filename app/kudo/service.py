@@ -34,6 +34,9 @@ class Service(object):
             {'user_id': self.user_id, 'repo_id': repo_id})
         return records_affected > 0
 
+    def dump(self, data):
+        return KudoSchema(exclude=['_id']).dump(data).data
+
     def prepare_kudo(self, githubRepo):
         data = githubRepo.data
         data['user_id'] = self.user_id
