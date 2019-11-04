@@ -49,6 +49,35 @@ class Home extends React.Component {
 
     resetRepos = repos => this.setState({ ...this.state, repos })
 
+    isKudo = repo => this.state.kudos.find(r => r.id == repo.id)
+    onKudo = repo => {
+        this.updateBackend(repo);
+    }
+
+
+    updateBackend = repo => {
+        if (this.isKudo(repo)) {
+            this.apiClient.deleteKudo(repo);
+        } else {
+            this.apiClient.createKudo(repo);
+        }
+        this.updateState(repo);
+    }
+
+
+    updateState = (repo) => {
+        if (this.isKudo(repo)) {
+            this.setState({
+                ...this.state,
+                kudos: this.state.kudos.filter(r => r.id !== repo.id)
+            })
+        } else {
+            this.setState({
+                ...this.state,
+                kudos: [repo, ...this.state.kudos]
+            })
+        }
+    }
 
 
 }
